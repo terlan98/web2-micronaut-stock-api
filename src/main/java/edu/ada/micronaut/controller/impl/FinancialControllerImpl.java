@@ -28,7 +28,7 @@ public class FinancialControllerImpl implements FinancialController
 	{
 		List<StockModel> result = null;
 		
-		logger.info("Received request for stocks: " + stockIndex);
+		logger.info("Received request for provider :: {} and stock :: {}", dataProviderName, stockIndex);
 		dataProviderName = dataProviderName.toUpperCase();
 		
 		String[] stockIndices = stockIndex.split(",");

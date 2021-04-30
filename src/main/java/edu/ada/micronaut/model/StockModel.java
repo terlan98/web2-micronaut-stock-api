@@ -6,7 +6,6 @@ import lombok.Data;
 
 import java.io.Serializable;
 
-@Introspected
 @Data
 @AllArgsConstructor
 public class StockModel implements Serializable
