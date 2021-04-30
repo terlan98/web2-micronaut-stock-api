@@ -1,6 +1,7 @@
 package edu.ada.micronaut.controller.impl;
 
 import edu.ada.micronaut.controller.FinancialController;
+import edu.ada.micronaut.model.StockModel;
 import edu.ada.micronaut.service.FinancialService;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.*;
@@ -8,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import java.util.List;
 
 @Controller(value = "/finance")
 public class FinancialControllerImpl implements FinancialController
@@ -24,25 +26,21 @@ public class FinancialControllerImpl implements FinancialController
 			@QueryValue("provider") String dataProviderName,
 			@QueryValue("index") String stockIndex)
 	{
-		String result = "";
+		List<StockModel> result = null;
 		
 		logger.info("Received request for stocks: " + stockIndex);
 		dataProviderName = dataProviderName.toUpperCase();
 		
 		String[] stockIndices = stockIndex.split(",");
 		
-		for (String index : stockIndices)
+		switch (dataProviderName)
 		{
-			logger.info("Requesting " + index + " from " + dataProviderName);
-			switch (dataProviderName)
-			{
-				case "YAHOO":
-					result += financialService.getDataFromYahoo(index) + "\n";
-					break;
-				case "ALPHAVANTAGE":
-					result += financialService.getDataFromAlphaVantage(index) + "\n";
-					break;
-			}
+			case "YAHOO":
+				result = financialService.getDataFromYahoo(stockIndices);
+				break;
+			case "ALPHAVANTAGE":
+				result = financialService.getDataFromAlphaVantage(stockIndices);
+				break;
 		}
 		
 		return result;
