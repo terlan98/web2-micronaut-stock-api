@@ -8,4 +8,4 @@ micronaut:
         signatures:
           secret:
             generator:
-              secret: pleaseChangeThisSecretForANewOne
+              secret: site-2021-ada-web2-tarlan-ismayilsoy
