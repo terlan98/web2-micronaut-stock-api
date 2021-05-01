@@ -5,7 +5,7 @@
     <groupId>edu.ada.micronaut</groupId>
     <artifactId>restapi</artifactId>
     <version>0.1</version>
-    <packaging>${packaging}</packaging>
+    <packaging>jar</packaging>
 
     <parent>
         <groupId>io.micronaut</groupId>
@@ -15,9 +15,9 @@
 
     <properties>
         <packaging>jar</packaging>
-        <jdk.version>1.8</jdk.version>
+        <jdk.version>11</jdk.version>
         <!-- If you are building with JDK 9 or higher, you can uncomment the lines below to set the release version -->
-        <!-- <release.version>8</release.version> -->
+         <release.version>11</release.version>
         <micronaut.version>2.4.2</micronaut.version>
         <exec.mainClass>edu.ada.micronaut.Application</exec.mainClass>
         <micronaut.runtime>netty</micronaut.runtime>
@@ -58,6 +58,12 @@
             <groupId>com.github.crazzyghost</groupId>
             <artifactId>alphavantage-java</artifactId>
             <version>1.5.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.micronaut.security</groupId>
+            <artifactId>micronaut-security-jwt</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
@@ -121,6 +127,11 @@
                     <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
 
                     <annotationProcessorPaths combine.children="append">
+                        <path>
+                            <groupId>io.micronaut.security</groupId>
+                            <artifactId>micronaut-security-annotations</artifactId>
+                            <version>${micronaut.security.version}</version>
+                        </path>
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>

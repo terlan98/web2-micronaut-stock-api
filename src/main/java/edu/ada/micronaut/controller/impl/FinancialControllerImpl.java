@@ -5,12 +5,15 @@ import edu.ada.micronaut.model.StockModel;
 import edu.ada.micronaut.service.FinancialService;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.*;
+import io.micronaut.security.annotation.Secured;
+import io.micronaut.security.rules.SecurityRule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import java.util.List;
 
+@Secured(SecurityRule.IS_AUTHENTICATED)
 @Controller(value = "/finance")
 public class FinancialControllerImpl implements FinancialController
 {
@@ -41,6 +44,8 @@ public class FinancialControllerImpl implements FinancialController
 			case "ALPHAVANTAGE":
 				result = financialService.getDataFromAlphaVantage(stockIndices);
 				break;
+				
+				//TODO Handle erroneous requests
 		}
 		
 		return result;

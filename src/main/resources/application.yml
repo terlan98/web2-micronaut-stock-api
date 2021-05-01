@@ -1,3 +1,11 @@
 micronaut:
   application:
     name: restapi
+  security:
+    authentication: bearer
+    token:
+      jwt:
+        signatures:
+          secret:
+            generator:
+              secret: pleaseChangeThisSecretForANewOne
