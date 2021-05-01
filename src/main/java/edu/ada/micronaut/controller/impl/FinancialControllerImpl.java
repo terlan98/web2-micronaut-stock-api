@@ -3,6 +3,7 @@ package edu.ada.micronaut.controller.impl;
 import edu.ada.micronaut.controller.FinancialController;
 import edu.ada.micronaut.model.StockModel;
 import edu.ada.micronaut.service.FinancialService;
+import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.*;
 import io.micronaut.security.annotation.Secured;
@@ -44,8 +45,8 @@ public class FinancialControllerImpl implements FinancialController
 			case "ALPHAVANTAGE":
 				result = financialService.getDataFromAlphaVantage(stockIndices);
 				break;
-				
-				//TODO Handle erroneous requests
+			default:
+				return HttpResponse.badRequest("Please make sure that the provider name is valid");
 		}
 		
 		return result;
